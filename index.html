@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Hitomezashi Pattern Generator Online</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+	<link rel="icon" href="favicon.ico">
+	<link href="index.css" type="text/css" rel="stylesheet"/>
+</head>
+<body onresize="setSize();">
+
+	<div id="wrapper">
+
+		<div id="settings">
+			<div id="settingsHeader">Settings</div>
+			<form onsubmit="event.preventDefault(); pg.drawAgain();">
+				<div class="ctrl">
+					<label for="borderSize">Line width:</label>
+					<input type="number" id="borderSize" min="2" value="20" step="2" />
+				</div>
+				<div class="ctrl">
+					<label for="fillingSize">Space width:</label>
+					<input type="number" id="fillingSize" min="2" value="20" step="2" />
+				</div>
+				<div class="ctrl">
+					<label for="xSize">Max X Pixel:</label>
+					<input type="number" id="xSize" min="0" step="1" />
+				</div>
+				<div class="ctrl">
+					<label for="ySize">Max Y Pixel:</label>
+					<input type="number" id="ySize" min="0" step="1" />
+				</div>
+				<div class="ctrl">
+					<label for="probability">Probability:</label>
+					<input type="number" id="probability" min="0" max="100" value="50" step="1" />
+				</div>
+				<div class="ctrl">
+					<label for="pattern">Pattern:</label>
+					<select id="pattern">
+						<option value="symmetric">symmetric</option>
+						<option value="mirror">mirror</option>
+						<option value="random">random</option>
+						<option value="hashtags">hashtags</option>
+						<option value="cross">cross</option>
+						<option value="diamond">diamond</option>
+						<option value="h_lines">h_lines</option>
+						<option value="diag_lines">diag_lines</option>
+					</select>
+				</div>
+				<div class="ctrl">
+					<label for="colored">Colored</label>
+					<input type="checkbox" id="colored" onchange="changeFilling(this.checked)" checked>
+				</div>
+				<div class="ctrl">
+					<label for="roundEdges">Round Edges</label>
+					<input type="checkbox" id="roundEdges" onchange="changeEdges(this.checked)">
+				</div>
+				<div class="ctrl">
+					<label for="frame">Frame</label>
+					<input type="checkbox" id="frame" onchange="changeFrame(this.checked)">
+				</div>
+				<div class="ctrl">
+					<label for="background">Background</label>
+					<input type="color" id="background" value="#333333" oninput="pg.drawAgain(this, 'background')">
+				</div>
+				<div class="ctrl">
+					<label for="border">Border</label>
+					<input type="color" id="border" value="#000000" oninput="pg.drawAgain(this, 'border')">
+				</div>
+				<div class="ctrl">
+					<label for="color1">Color 1</label>
+					<input type="color" id="color1" value="#0000dd" oninput="pg.drawAgain(this, 'color1')">
+				</div>
+				<div class="ctrl">
+					<label for="color2">Color 2</label>
+					<input type="color" id="color2" value="#000044" oninput="pg.drawAgain(this, 'color2')">
+				</div>
+
+				<br>
+
+				<div class="ctrl">
+					<input type="button" id="drawAgainButton" value="Update" onclick="pg.drawAgain()">
+					<input type="button" id="drawNewButton" value="New" onclick="pg.drawNew()">
+				</div>
+				<!-- <div class="ctrl">
+					<input type="button" id="previousButton" value="Previous" onclick="pg.loadConfig(-1)">
+					<input type="button" id="nextButton" value="Next" onclick="pg.loadConfig(1)">
+				</div> -->
+				<div class="ctrl">
+					<span>Image as .png</span>
+				</div>
+				<div class="ctrl">
+					<input type="button" id="downloadButton" value="Download" onclick="cd.downloadAsImage()">
+				</div>
+				<div class="ctrl">
+					<span>Configuration File</span>
+				</div>
+				<div class="ctrl">
+					<input type="button" id="importButton" value="Import" onclick="pg.importSaveFile()">
+					<input type="button" id="exportButton" value="Export" onclick="pg.exportSaveFile()">
+				</div>
+				<input type="submit" style="display: none;">
+				<br>
+				<a href="https://github.com/nicolaswith/hitomezashi" target="_blank">GitHub Mirror</a>
+			</form>
+		</div>
+
+		<div id="content">
+			<div id="header">
+				<img src="menu.png" id="menu" onclick="toggleSettings()">
+				<span>Hitomezashi Pattern Generator</span>
+			</div>
+
+			<div id="canvasWrapper">
+				<canvas id="canvas"></canvas>
+			</div>
+
+		</div>
+
+	</div>
+
+	<script src="index.js"></script>
+
+	<script>
+
+var settingsState = true;
+
+function toggleSettings() {
+	if (settingsState) {
+		document.getElementById("settings").style.display = "none";
+		settingsState = false;
+	} else {
+		document.getElementById("settings").style.display = "block";
+		settingsState = true;
+	}
+	setSize();
+}
+
+function setSize() {
+	let xPixel = document.body.offsetWidth  - document.getElementById("settings").offsetWidth;
+	let yPixel = document.body.offsetHeight - document.getElementById("header").offsetHeight - 25;
+	document.getElementById("canvasWrapper").style.width  = xPixel + "px";
+	document.getElementById("canvasWrapper").style.height = yPixel + "px";
+}
+
+(function (){
+	setSize();
+})();
+
+	</script>
+
+</body>
+</html>
