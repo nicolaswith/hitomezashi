@@ -796,8 +796,8 @@ function init() {
 	let xPixel = document.body.offsetWidth  - 10;
 	let yPixel = document.body.offsetHeight - 100;
 	let size = (xPixel > yPixel) ? yPixel : xPixel;
-	Util.getInput("xSize").valueAsNumber = size;
-	Util.getInput("ySize").valueAsNumber = size;
+	Util.getInput("xSize").valueAsNumber = size //+ 1000;
+	Util.getInput("ySize").valueAsNumber = size //+ 1000;
 	pg = new PatternGenerator();
 	cd = new CanvasDrawer(document.getElementById("canvas") as HTMLCanvasElement)
 	cm = new ColorManager();

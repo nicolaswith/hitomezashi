@@ -109,10 +109,13 @@
 			<div id="header">
 				<img src="menu.png" id="menu" onclick="toggleSettings()">
 				<span>Hitomezashi Pattern Generator</span>
+				<img src="refresh.png" id="new" onclick="pg.drawNew()">
 			</div>
 
 			<div id="canvasWrapper">
-				<canvas id="canvas"></canvas>
+				<div id="padder">
+					<canvas id="canvas"></canvas>
+				</div>
 			</div>
 
 		</div>
@@ -138,7 +141,7 @@ function toggleSettings() {
 
 function setSize() {
 	let xPixel = document.body.offsetWidth  - document.getElementById("settings").offsetWidth;
-	let yPixel = document.body.offsetHeight - document.getElementById("header").offsetHeight - 25;
+	let yPixel = document.body.offsetHeight - document.getElementById("header").offsetHeight;
 	document.getElementById("canvasWrapper").style.width  = xPixel + "px";
 	document.getElementById("canvasWrapper").style.height = yPixel + "px";
 }

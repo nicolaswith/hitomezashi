@@ -554,6 +554,7 @@ class PatternGenerator {
     }
     saveFile() {
         return {
+            pattern: this.pattern,
             probability: this.probability,
             xMax: this.xMax,
             yMax: this.yMax,
@@ -571,6 +572,7 @@ class PatternGenerator {
         };
     }
     loadFile(file) {
+        this.pattern = file.pattern;
         this.probability = file.probability;
         this.xMax = file.xMax;
         this.yMax = file.yMax;
@@ -584,6 +586,7 @@ class PatternGenerator {
         cm.setColorsRGB(file.background, file.border, file.color1, file.color2);
         let xSize = file.xMax * (file.fillingSize + file.borderSize) + file.borderSize;
         let ySize = file.yMax * (file.fillingSize + file.borderSize) + file.borderSize;
+        Util.getInput("pattern").value = file.pattern;
         Util.getInput("xSize").valueAsNumber = xSize;
         Util.getInput("ySize").valueAsNumber = ySize;
         Util.getInput("fillingSize").valueAsNumber = file.fillingSize;
@@ -654,8 +657,8 @@ function init() {
     let xPixel = document.body.offsetWidth - 10;
     let yPixel = document.body.offsetHeight - 100;
     let size = (xPixel > yPixel) ? yPixel : xPixel;
-    Util.getInput("xSize").valueAsNumber = size;
-    Util.getInput("ySize").valueAsNumber = size;
+    Util.getInput("xSize").valueAsNumber = size; //+ 1000;
+    Util.getInput("ySize").valueAsNumber = size; //+ 1000;
     pg = new PatternGenerator();
     cd = new CanvasDrawer(document.getElementById("canvas"));
     cm = new ColorManager();

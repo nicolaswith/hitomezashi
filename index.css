@@ -87,7 +87,6 @@ a {
 
 
 
-
 /* Content div */
 
 #header {
@@ -95,7 +94,6 @@ a {
 	font-size: 50px;
 	background-color: rgb(25, 25, 50);
 	text-align: center;
-	margin-bottom: 25px;
 	box-shadow: 0px 5px 10px 2px #000000a0;
 }
 
@@ -106,8 +104,21 @@ a {
 	cursor: pointer;
 }
 
+#new {
+	height: 50px;
+	margin: 3px 10px 0 0;
+	cursor: pointer;
+	float: right;
+}
+
 #canvasWrapper {
 	overflow: auto;
+}
+
+#padder {
 	text-align: center;
-	padding-bottom: 25px;
+	width: fit-content;
+	padding: 25px;
+    margin-left: auto;
+    margin-right: auto;
 }
